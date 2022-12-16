@@ -1,7 +1,6 @@
 use std::io;
 use rand::seq::SliceRandom;
 use std::str::Chars;
-#![crate_name = "doc"]
 
 /// The "CarryOn()" function is used for determining if the user wants to add more words to the glossary.
 /// The user can input 1 to continue, or any other number to quit.

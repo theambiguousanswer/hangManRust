@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["CarryOn","The “CarryOn()” function is used for determining if the user wants to add more words to the glossary. The user can input 1 to continue, or any other number to quit."],["CheckGuess",""],["CheckVector",""],["GameOn",""],["Guess",""],["HangMan",""],["OrderLetters",""],["main",""]]};
