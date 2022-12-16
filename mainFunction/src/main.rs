@@ -2,6 +2,8 @@ use std::io;
 use rand::seq::SliceRandom;
 use std::str::Chars;
 
+/// The "CarryOn()" function is used for determining if the user wants to add more words to the glossary.
+/// The user can input 1 to continue, or any other number to quit.
 fn CarryOn()->i8{
     println!("Do you want to continue ending words to the glossary?");
     println!("Press 1 for yes, enter any other number for no.");
