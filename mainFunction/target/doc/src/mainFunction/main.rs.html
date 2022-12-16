@@ -196,12 +196,47 @@
 <span id="190">190</span>
 <span id="191">191</span>
 <span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::io</span>;
 <span class="kw">use</span> <span class="ident">rand::seq::SliceRandom</span>;
 <span class="kw">use</span> <span class="ident">std::str::Chars</span>;
 
 <span class="doccomment">/// The &quot;CarryOn()&quot; function is used for determining if the user wants to add more words to the glossary.</span>
 <span class="doccomment">/// The user can input 1 to continue, or any other number to quit.</span>
+<span class="doccomment">/// This function returns the number the player entered to the main function.</span>
 <span class="kw">fn</span> <span class="ident">CarryOn</span>()-&gt;<span class="ident">i8</span>{
     <span class="macro">println!</span>(<span class="string">&quot;Do you want to continue ending words to the glossary?&quot;</span>);
     <span class="macro">println!</span>(<span class="string">&quot;Press 1 for yes, enter any other number for no.&quot;</span>);
@@ -211,6 +246,14 @@
     <span class="kw">return</span> <span class="ident">n1</span>;
 }
 
+<span class="doccomment">/// The &quot;OrderLetters(&amp;mut Chars, &amp;mut Vec&lt;chars&gt;&quot; function is a somewhat complicated function.</span>
+<span class="doccomment">/// The Vector passed through gets compared with the Chars of the word being guessed in hang man.</span>
+<span class="doccomment">/// If an element of the vector matches up with a character from the word being guessed,</span>
+<span class="doccomment">/// that element has whatever letter it is printed.</span>
+<span class="doccomment">/// Otherwise, a blank &#39; _ &#39; is printed where a correct letter would be.</span>
+<span class="doccomment">/// This function prints the correctly guessed letters in order of how they are in the correct word, </span>
+<span class="doccomment">/// to make it easier for the user/player to guess what the word is.</span>
+<span class="doccomment">/// This function is void.</span>
 <span class="kw">fn</span> <span class="ident">OrderLetters</span>(<span class="ident">chars</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Chars</span>, <span class="ident">vector</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>){
     <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">chars</span>{
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">found</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">false</span>;
@@ -226,6 +269,10 @@
     }
 }
 
+<span class="doccomment">/// The &quot;Guess() function is used to prompt the user/player for a guess of a letter of the unknown word.&quot;</span>
+<span class="doccomment">/// When the player/user enters in a guess, the function will only take the first letter/character of their guess,</span>
+<span class="doccomment">/// To ensure that they did not enter in too many letters.</span>
+<span class="doccomment">/// This function returns their guess to the function that called it.</span>
 <span class="kw">fn</span> <span class="ident">Guess</span>() -&gt; <span class="ident">char</span>
 {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">guess</span> <span class="op">=</span> <span class="ident">String::new</span>();
@@ -234,6 +281,8 @@
     <span class="kw">return</span> <span class="ident">guess</span>;
 }
 
+<span class="doccomment">/// The &quot;CheckGuess()&quot; function is used to see if the player&#39;s guess matches a character of the word being used.</span>
+<span class="doccomment">/// If it is, the function will check how many times that letter shows up in the word, and will retun that value.</span>
 <span class="kw">fn</span> <span class="ident">CheckGuess</span>(<span class="ident">word</span>: <span class="ident">String</span>, <span class="ident">guess</span>: <span class="ident">char</span>) -&gt; <span class="ident">usize</span>{
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">CorrectLetter</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">word</span>.<span class="ident">len</span>() {
@@ -244,6 +293,8 @@
     <span class="kw">return</span> <span class="ident">CorrectLetter</span>;
 }
 
+<span class="doccomment">/// This function checks a vector passed through it to see if a character that is also passed through it,</span>
+<span class="doccomment">/// is within the vector. If it is, return a true bool value, and if not, return a false bool value.</span>
 <span class="kw">fn</span> <span class="ident">CheckVector</span>(<span class="ident">vector</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span>, <span class="ident">letter</span>: <span class="ident">char</span>) -&gt; <span class="ident">bool</span>{
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">RValue</span> <span class="op">=</span> <span class="bool-val">false</span>;
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">vector</span>.<span class="ident">iter_mut</span>() {
@@ -254,6 +305,13 @@
     <span class="kw">return</span> <span class="ident">RValue</span>;
 }
 
+
+<span class="doccomment">/// This is the main function that handles the game. It prompts the user/player over and over again,</span>
+<span class="doccomment">/// asking for guesses of what letters might be in the correct word. The function will keep prompting these questions</span>
+<span class="doccomment">/// and evaluating what the player inputs, until the player either wins the game or loses it.</span>
+<span class="doccomment">/// This script will display what letters the player has already used, which are wrong, and which are right.</span>
+<span class="doccomment">/// The script will also tell the player if they have already guessed a letter or not.</span>
+<span class="doccomment">/// In this function you will see comments of some old code I used before I moved onto better tactics.</span>
 <span class="kw">fn</span> <span class="ident">GameOn</span>(<span class="ident">word</span>: <span class="ident">String</span>){
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">CorrectLetter</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">TotalLetter</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
@@ -311,6 +369,12 @@
     }
 }
 
+<span class="doccomment">/// Main function of the program. Program starts with the basic question of &quot;what is your name?&quot;</span>
+<span class="doccomment">/// The function then goes right into the point of this script. The main function asks the player to input</span>
+<span class="doccomment">/// some words that they would like to be featured in the game, and the script will randomly pick one of those words</span>
+<span class="doccomment">/// and tell the player how many letters/characters it has.</span>
+<span class="doccomment">/// The script will then call the GameOn() function to begin the game. Once the game ends, no matter the outcome,</span>
+<span class="doccomment">/// the script will thank the player for playing.</span>
 <span class="kw">fn</span> <span class="ident">main</span>(){
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">words</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
     <span class="macro">println!</span>(<span class="string">&quot;Welcome to hangman, the game! What&#39;s your name?&quot;</span>);
@@ -343,6 +407,10 @@
     <span class="macro">println!</span>(<span class="string">&quot;Thanks for playing!&quot;</span>);
 }
 
+<span class="doccomment">/// This function displays the status of the hangman, depending on how many guesses/lives/mistakes left the player has.</span>
+<span class="doccomment">/// With each mistake the player mistakes, a new body part of the hangman will be displayed, entire the entire body is shown,</span>
+<span class="doccomment">/// and the player loses the game.</span>
+<span class="doccomment">/// This function is void.</span>
 <span class="kw">fn</span> <span class="ident">HangMan</span>(<span class="ident">mistakes</span>: <span class="ident">i16</span>){
     <span class="kw">if</span> <span class="ident">mistakes</span> <span class="op">==</span> <span class="number">6</span> {
         <span class="macro">println!</span>(<span class="string">&quot;----|&quot;</span>);
